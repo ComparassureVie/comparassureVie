@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ComparAssure Vie - Simulation</title>
     <link rel="stylesheet" href="style.css">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3E9ZTMXH0D"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-3E9ZTMXH0D');
+    </script>
 </head>
 <body>
     <div class="form-container">
@@ -128,6 +138,11 @@
             document.querySelectorAll('.form-page').forEach(page => page.style.display = 'none');
             document.getElementById('page-' + pageNumber).style.display = 'block';
 
+            // Envoie une page vue à Google Analytics chaque fois que la page change
+            gtag('event', 'page_view', {
+                page_path: '/page-' + pageNumber // Vous pouvez changer l'URL si nécessaire
+            });
+
             const totalPages = 3;
             const progress = ((pageNumber - 1) / totalPages) * 100;
             document.getElementById('progress-bar').style.width = progress + '%';
@@ -145,6 +160,11 @@
                     document.querySelectorAll('.form-page').forEach(page => page.style.display = 'none');
                     document.getElementById('thank-you').style.display = 'flex';
                     document.getElementById('progress-bar').style.width = '100%';
+
+                    // Suivi de la page de remerciement
+                    gtag('event', 'page_view', {
+                        page_path: '/thank-you' // Page de remerciement
+                    });
                 } else {
                     alert("Une erreur s'est produite, veuillez réessayer.");
                 }
@@ -154,6 +174,10 @@
         });
 
         document.getElementById('page-1').style.display = 'block';
+        // Envoie un premier événement page vue au chargement de la première page
+        gtag('event', 'page_view', {
+            page_path: '/page-1' // Initialisation du suivi de la première page
+        });
     </script>
 </body>
 </html>
